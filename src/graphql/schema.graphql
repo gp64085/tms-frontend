@@ -1,0 +1,59 @@
+scalar Date
+
+enum Role {
+  ADMIN
+  EMPLOYEE
+}
+
+enum Status {
+  PENDING
+  IN_TRANSIT
+  DELIVERED
+  CANCELLED
+}
+
+type Shipment {
+  id: ID!
+  trackingId: String!
+  customerName: String!
+  origin: String!
+  destination: String!
+  status: Status!
+  flagged: Boolean!
+  createdDate: String!
+}
+
+type PaginatedShipments {
+  items: [Shipment]!
+  totalCount: Int!
+  hasMore: Boolean!
+}
+
+input ShipmentFilter {
+  status: Status
+  customerName: String
+}
+
+type Query {
+  # Supports filtering and pagination
+  listShipments(
+    filter: ShipmentFilter
+    page: Int = 1
+    limit: Int = 10
+  ): PaginatedShipments!
+
+  getShipmentDetails(id: ID!): Shipment
+}
+
+type Mutation {
+  addShipment(
+    trackingId: String!
+    customerName: String!
+    origin: String!
+    destination: String!
+  ): Shipment! @auth(role: ADMIN) # Only Admin can add
+  
+  updateShipment(id: ID!, status: Status!): Shipment!
+
+  deleteShipment(id: ID!): Boolean! @auth(role: ADMIN)
+}
