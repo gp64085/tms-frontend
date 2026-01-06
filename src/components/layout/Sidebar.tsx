@@ -8,7 +8,9 @@ import {
   ChevronDown,
   ChevronRight,
   X,
+  LogOut,
 } from "lucide-react";
+import { useAuth } from "../../hooks/useAuth";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -16,8 +18,8 @@ interface SidebarProps {
 }
 
 const Sidebar: FunctionComponent<SidebarProps> = ({ isOpen, onClose }) => {
-  // State for the 1-level submenu toggle
   const [expandedMenu, setExpandedMenu] = useState<string | null>("shipments");
+  const { logout } = useAuth();
 
   const toggleSubmenu = (menu: string) => {
     setExpandedMenu(expandedMenu === menu ? null : menu);
@@ -139,6 +141,9 @@ const Sidebar: FunctionComponent<SidebarProps> = ({ isOpen, onClose }) => {
             <div className="text-sm">
               <div className="font-medium">John Doe</div>
               <div className="text-xs text-slate-500">Admin User</div>
+            </div>
+            <div className="ml-4" onClick={logout}>
+              <LogOut className="cursor-pointer hover:text-red-600" size={20} />
             </div>
           </div>
         </div>
