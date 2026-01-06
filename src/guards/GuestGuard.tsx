@@ -5,7 +5,7 @@ export const GuestGuard = () => {
   const { isAuthenticated } = useAuth();
 
   // If already authenticated, redirect to Dashboard
-  if (isAuthenticated) {
+  if (isAuthenticated()) {
     return <Navigate to="/" replace />;
   }
 

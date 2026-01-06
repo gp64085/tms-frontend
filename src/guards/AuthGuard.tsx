@@ -4,7 +4,7 @@ import { useAuth } from "../hooks/useAuth";
 export const AuthGuard = () => {
   const { isAuthenticated } = useAuth();
 
-  if (!isAuthenticated) {
+  if (!isAuthenticated()) {
     return <Navigate to="/login" replace />;
   }
 

@@ -5,6 +5,7 @@ import MainLayout from "../components/layout/MainLayout";
 import Dashboard from "../pages/Dashboard";
 import Login from "../pages/Login";
 import Placeholder from "../pages/Placeholder";
+import SignUp from "../pages/Signup";
 
 export const router = createBrowserRouter([
   // --- GUEST ROUTES (Public) ---
@@ -14,6 +15,10 @@ export const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/signup",
+        element: <SignUp />,
       },
     ],
   },
